@@ -163,11 +163,14 @@ buttons.forEach((button) => {
       case "Backspace":
         if (afterEqual === true) {
           displayValue = "";
-          return display.textContent = displayValue;
-        }
-        if (displayValue !== "") {
-          displayValue = displayValue.slice(0, -1);
           display.textContent = displayValue;
+        } else if (displayValue.charAt(displayValue.length - 1) === ".") {
+            afterDecimal = false;
+            displayValue = displayValue.slice(0, -1);
+            display.textContent = displayValue;
+        } else if (displayValue !== "") {
+            displayValue = displayValue.slice(0, -1);
+            display.textContent = displayValue;
         }
         break;
     }
