@@ -77,8 +77,8 @@ let numberOne = 0; // first number to run in operate function
 let numberTwo = 0; // second number to run in operate function
 let operator = ""; // string that runs in operate function
 let operatorOn = false; // used for operator (+,-,*,/) logic
-let afterEqual = false; // used to reset the display if a number is pressed 
-                        // after the "=" button
+let afterOperate = false; // used to reset the display if a number is pressed 
+                          // after an operation
 let displayValue = ""; // calculator screen display
 let afterDecimal = false; // don't allow more than one decimal
 
@@ -89,9 +89,9 @@ buttons.forEach((button) => {
   button.addEventListener("click", () => {
     // listening for numbers (0 through 9)
     if (button.id >= "0" && button.id <= "9") {
-      if (afterEqual === true) {
+      if (afterOperate === true) {
         displayValue = "";
-        afterEqual = false;
+        afterOperate = false;
       }
       afterNumber = true;
       displayValue += button.id;
@@ -114,7 +114,7 @@ buttons.forEach((button) => {
         afterDecimal = false;
         afterNumber = false;
         numberTwo = Number(displayValue);
-        afterEqual = true;
+        afterOperate = true;
         operate(operator, numberOne, numberTwo);
         operator = button.id;
       } else if (operatorOn === true && afterNumber === false) {
@@ -131,7 +131,7 @@ buttons.forEach((button) => {
         numberTwo = 0;
         operator = "";
         operatorOn = false;
-        afterEqual = false;
+        afterOperate = false;
         afterDecimal = false;
         displayValue = "";
         display.textContent = displayValue;
@@ -141,16 +141,16 @@ buttons.forEach((button) => {
           afterDecimal = false;
           operatorOn = false;
           numberTwo = Number(displayValue);
-          afterEqual = true;
+          afterOperate = true;
           operate(operator, numberOne, numberTwo);
         }
         break;
       case ".": // decimal button
         if (afterDecimal === false) {
           afterDecimal = true;
-          if (afterEqual === true) {
+          if (afterOperate === true) {
             displayValue = "";
-            afterEqual = false;
+            afterOperate = false;
           }
           if (displayValue === "") {
             displayValue = "0.";
@@ -161,7 +161,7 @@ buttons.forEach((button) => {
         }
         break;
       case "Backspace":
-        if (afterEqual === true) {
+        if (afterOperate === true) {
           displayValue = "";
           display.textContent = displayValue;
         } else if (displayValue.charAt(displayValue.length - 1) === ".") {
