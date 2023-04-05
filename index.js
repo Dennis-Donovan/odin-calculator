@@ -38,19 +38,20 @@ function divide(a, b) {
     divideByZeroAlert = false;
     finalDivideByZeroAlert = false;
     display.textContent = "for (;;) {}"
-    return delay(1000).then(() => display.textContent = "");
+    return delay(1250).then(() => display.textContent = "");
   }
   if (b === 0 && divideByZeroAlert === true) {
     alert("This may be your final warning!");
     finalDivideByZeroAlert = true;
-    display.textContent = "It's me, HAL 9000"
-    return delay(1000).then(() => display.textContent = "");
+    display.textContent = "It's me..."
+    delay(1000).then(() => display.textContent = "HAL 9000!");
+    return delay(2000).then(() => display.textContent = "");
   }
   if (b === 0) {
     alert("Oh don't you dare"); 
     divideByZeroAlert = true;
     display.textContent = "Hello, World!";
-    return delay(500).then(() => display.textContent = "");
+    return delay(1000).then(() => display.textContent = "");
   }
   display.textContent = Math.round((a / b + Number.EPSILON) * 1000) / 1000;
   console.log(`${a} / ${b} = ${a / b}`);
@@ -186,12 +187,3 @@ window.addEventListener('keydown', function (e) {
       this.document.getElementById(e.key).click();
   }
 });
-
-// to do: 
-// decimal button (disable the decimal button if there’s already one in the 
-// display) **DONE**
-// round decimals **DONE**
-// display snarky error message for divide by 0 **DONE**
-// use CSS to make calculator look nice
-// add backspace button **DONE**
-// add keyboard support **DONE**
